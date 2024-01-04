@@ -1,0 +1,41 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    {% for product in products %}
+
+{#    <div class="col-lg-3 card ml-2 mb-2" style="align-items: center">#}
+{#        <img class="thumbnail" src="{{ product.imageURL }}" >#}
+{#        <div class="box-element product" style="text-align: center;">#}
+{#            <h6><strong>{{ product.name }}</strong></h6>#}
+{#            <hr>#}
+{#            <button data-product="{{ product.id }}" data-action="add"#}
+{#                    class="btn btn-outline-secondary add-btn update-cart ">Add to cart#}
+{#            </button>#}
+{#            <a class="btn btn-outline-success mr-2" href={% url 'product_detail' product.id %}>View</a>#}
+{#            <h6 style="display: inline-block; float: right; padding-top: 10px; "><strong>Lei {{ product.price|floatformat:0 }}</strong></h6>#}
+{#        </div>#}
+{#    </div>#}
+
+                                            {#  Product Card  #}
+        <div class="product-inner">
+            <div class="product-wrap">
+                <img src="{{ product.imageURL }}">
+                <div class="actions">
+                    <a data-product="{{ product.id }}" data-action="add" href="" class="add-to-cart update-cart"></a>
+                    <a href={% url 'product_detail' product.id %} class="quickview"></a>
+                    <a href="" class="wishlist"></a>
+                </div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-title"><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h3>
+                <span class="price">Lei {{ product.price|floatformat:0 }}</span>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+{% endblock content %}
+
+
