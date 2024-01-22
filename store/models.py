@@ -15,18 +15,32 @@ class Customer(models.Model):
         return self.name
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL')
+
+    class Meta:
+        db_table = 'category'
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
 
     def __str__(self):
         return self.name
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
-    digital = models.BooleanField(default=False, null=True, blank=False)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    description = models.TextField(null=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL')
+    price = models.DecimalField(default=0.00, max_digits=7, decimal_places=2)
+    discount = models.DecimalField(default=0.00, max_digits=7, decimal_places=2, verbose_name='Discount %')
+    category = models.ForeignKey(to=Category, on_delete=models.SET_DEFAULT, default=None, null=True)
+    quantity = models.PositiveIntegerField(default=0)
+    description = models.TextField(blank=True, null=True)
     image = models.ImageField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'product'
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
 
     def __str__(self):
         return self.name
@@ -47,16 +61,6 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.id)
-
-    @property
-    def shipping(self):
-        shipping = False
-        orderitems =self.orderitem_set.all()
-        for i in orderitems:
-            if i.product.digital == False:
-                shipping = True
-        return shipping
-
 
     @property
     def get_cart_total(self):
@@ -80,6 +84,7 @@ class OrderItem(models.Model):
     def get_total(self):
         total = self.product.price * self.quantity
         return total
+
 
 
 class ShippingAddress(models.Model):
