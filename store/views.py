@@ -18,12 +18,9 @@ def store(request):
     else:
         products = Product.objects.filter(category=selected_category_id)
 
-    categories = Category.objects.all()
-
     context = {
         'products': products,
         'cartItems': cartData(request)['cartItems'],
-        'categories': categories,
         'selected_category_id': selected_category_id,
 
     }
@@ -32,25 +29,21 @@ def store(request):
 
 
 def cart(request):
-
     context = cartData(request)
     return render(request, 'store/cart.html', context)
 
 
 def product_detail(request, product_id):
-    categories = Category.objects.all()
 
     products = Product.objects.all()
     product = Product.objects.get(id=product_id)
 
-    context = {'product': product, 'products': products, 'categories': categories,
-               'current_product': product, 'cartItems': cartData(request)['cartItems']}
+    context = {'product': product, 'products': products, 'current_product': product,
+               'cartItems': cartData(request)['cartItems']}
 
     return render(request, 'store/product_detail.html', context)
 
 def checkout(request):
-
-
     data = cartData(request)
 
     cartItems = data['cartItems']
@@ -60,11 +53,8 @@ def checkout(request):
     for item in items:
         if not cartItems:
             return redirect('store')
-    context = {'order': order, 'cartItems': cartItems}
+    context = {'order': order,'categories': categories, 'cartItems': cartItems}
     return render(request, 'store/checkout.html', context)
-
-
-
 
 
 

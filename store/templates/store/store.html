@@ -1,4 +1,4 @@
-{% extends 'store/main.html' %}
+ {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
 
@@ -17,8 +17,18 @@
                             </div>
                         </div>
                         <div class="product-info">
-                            <h3 class="product-title"><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h3>
-                            <span class="price">Lei {{ product.price|floatformat:0 }}</span>
+                            {% if product.discount %}
+
+                                <h3 class="product-title"><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h3>
+                                <span class="price"><s>Lei {{ product.price|floatformat:0 }}</s></span>
+                                <span class="price">Lei {{ product.sell_price|floatformat:0 }}</span>
+                                <span class="price">Reducere: {{ product.discount|floatformat:0 }}%</span>
+
+                            {% else %}
+
+                                <span class="price">Lei {{ product.price|floatformat:0 }}</span>
+
+                            {% endif %}
                         </div>
                     </div>
                 </div>
