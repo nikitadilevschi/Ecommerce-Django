@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     #My apps:
     'store.apps.StoreConfig',
     'rest_framework',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -61,9 +62,7 @@ ROOT_URLCONF = 'ecommerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['store/templates/store/../blocks/',
-
-                 ],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

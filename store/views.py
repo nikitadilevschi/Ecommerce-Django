@@ -3,7 +3,7 @@ import json
 import time
 
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, get_list_or_404
 
 from .models import *
 from .utils import cookieCart, cartData, guestOrder
@@ -11,18 +11,15 @@ from .utils import cookieCart, cartData, guestOrder
 
 # Create your views here.
 
-def store(request):
-    selected_category_id = request.GET.get('category', '0')  # Set the default value to '0' if not provided
-    if selected_category_id == '0':
-        products = Product.objects.all()  # If '0' is selected, fetch all products
+def store(request, category_slug='all'):
+    if category_slug == 'all':
+        products = Product.objects.all()
     else:
-        products = Product.objects.filter(category=selected_category_id)
+        products = get_list_or_404(Product.objects.filter(category__slug=category_slug))
 
     context = {
         'products': products,
         'cartItems': cartData(request)['cartItems'],
-        'selected_category_id': selected_category_id,
-
     }
 
     return render(request, 'store/store.html', context)
@@ -33,10 +30,11 @@ def cart(request):
     return render(request, 'store/cart.html', context)
 
 
-def product_detail(request, product_id):
+def product_detail(request, product_slug):
 
     products = Product.objects.all()
-    product = Product.objects.get(id=product_id)
+    product = Product.objects.get(slug=product_slug)
+
 
     context = {'product': product, 'products': products, 'current_product': product,
                'cartItems': cartData(request)['cartItems']}
@@ -53,7 +51,7 @@ def checkout(request):
     for item in items:
         if not cartItems:
             return redirect('store')
-    context = {'order': order,'categories': categories, 'cartItems': cartItems}
+    context = {'order': order, 'cartItems': cartItems}
     return render(request, 'store/checkout.html', context)
 
 

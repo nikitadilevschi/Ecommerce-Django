@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <div class="login-page bg-light">
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <h3 class="mb-3">Înregistrare</h3>
+                    <div class="bg-white shadow rounded">
+                        <div class="row">
+                            <div class="col-md-7 pe-0">
+                                <div class="form-left h-100 py-5 px-5">
+                                    <form action="" class="row g-4">
+                                        <div class="col-12">
+                                            <label>Adresa ta de e-mail<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                                <input type="text" class="form-control" placeholder="exemplu@gmail.com">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label>Nume<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
+                                                <input type="password" class="form-control" placeholder="Introdu numele">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label>Prenume<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
+                                                <input type="password" class="form-control" placeholder="Introdu prenumele">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label>Parola<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
+                                                <input type="password" class="form-control" placeholder="Introdu parola">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label>Confirmă Parola<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
+                                                <input type="password" class="form-control" placeholder="Confirmă parola">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 button-container">
+                                            <button type="submit" class="btn btn-dark px-4 mt-4">Înregistrează-te</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-5 ps-0 d-none d-md-block">
+                                <div class="form-right h-100 bg-dark text-white text-center pt-5">
+                                    <a class="me-auto" href="{% url 'store' %}">
+                                        <img src="{% static "images/logohusle5.png" %}"  class="logo enlarged-logo" alt="logo">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,4 +1,4 @@
- {% extends 'store/main.html' %}
+{% extends 'main.html' %}
 {% load static %}
 {% block content %}
 
@@ -9,25 +9,25 @@
                 <div class="col">
                     <div class="product-inner">
                         <div class="product-wrap">
+
                             <img src="{{ product.imageURL }}">
+                            {% if product.discount %}
+                            <div class="badge">Reducere: {{ product.discount|floatformat:0 }}%</div>
+                            {% endif %}
+
                             <div class="actions">
                                 <a data-product="{{ product.id }}" data-action="add" href="" class="add-to-cart update-cart"></a>
-                                <a href={% url 'product_detail' product.id %} class="quickview"></a>
+                                <a href={% url 'product_detail' product.slug %} class="quickview"></a>
                                 <a href="" class="wishlist"></a>
                             </div>
                         </div>
                         <div class="product-info">
+                            <h3 class="product-title"><a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a></h3>
                             {% if product.discount %}
-
-                                <h3 class="product-title"><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h3>
+                                <span class="discount-price">Lei {{ product.sell_price|floatformat:0 }}</span>
                                 <span class="price"><s>Lei {{ product.price|floatformat:0 }}</s></span>
-                                <span class="price">Lei {{ product.sell_price|floatformat:0 }}</span>
-                                <span class="price">Reducere: {{ product.discount|floatformat:0 }}%</span>
-
                             {% else %}
-
                                 <span class="price">Lei {{ product.price|floatformat:0 }}</span>
-
                             {% endif %}
                         </div>
                     </div>

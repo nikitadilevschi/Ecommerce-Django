@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <div class="login-page bg-light">
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <h3 class="mb-3">Autorizare</h3>
+                    <div class="bg-white shadow rounded">
+                        <div class="row">
+                            <div class="col-md-7 pe-0">
+                                <div class="form-left h-100 py-5 px-5">
+                                    <form action="" class="row g-4">
+                                        <div class="col-12">
+                                            <label>Adresa ta de e-mail<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                                <input type="text" class="form-control" placeholder="exemplu@gmail.com">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <label>Parola<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
+                                                <input type="text" class="form-control" placeholder="Introdu parola">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+                                                <label class="form-check-label" for="inlineFormCheck">Ține-mă minte</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <a href="#" class="float-end text-primary">Ai uitat parola?</a>
+                                        </div>
+
+                                        <div class="col-12 button-container">
+                                            <div class="d-flex justify-content-start flex-column flex-md-row">
+                                                <button type="submit" class="btn btn-dark px-4 mt-4 mb-2 mb-md-0">Intră in cont</button>
+                                                <button type="submit" class="btn btn-secondary px-4 mt-4 mb-2 mb-md-0">Înregistrează-te</button>
+                                            </div>
+                                            <button type="submit" class="btn btn-dark px-4 float-end mt-4">Continuă ca oaspete</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-5 ps-0 d-none d-md-block">
+                                <div class="form-right h-100 bg-dark text-white text-center pt-5">
+                                    <a class="me-auto" href="{% url 'store' %}">
+                                        <img src="{% static "images/logohusle5.png" %}"  class="logo enlarged-logo" alt="logo">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
